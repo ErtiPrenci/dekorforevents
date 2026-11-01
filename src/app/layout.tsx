@@ -7,7 +7,7 @@ const heading = Fraunces({ subsets: ["latin", "latin-ext"], variable: "--font-he
 
 export const metadata: Metadata = {
   title: { default: "Dekore për evente", template: "%s" },
-  description: "Rezervo dekore të punuara me dorë për ditëlindje, dasma dhe evente.",
+  description: "Struktura profesionale dhe zgjidhje për eventet tuaja — rezervoni online.",
 };
 
 export const viewport: Viewport = { themeColor: "#fbf8f5" };

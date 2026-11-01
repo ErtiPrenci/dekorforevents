@@ -53,7 +53,7 @@ export default async function ShopLayout({ children }: { children: React.ReactNo
           <div className="mx-auto grid max-w-6xl gap-8 px-4 py-10 text-sm text-ink-soft sm:grid-cols-3">
             <div>
               <p className="font-display text-lg font-semibold text-ink">{b.emri}</p>
-              <p className="mt-1">Dekore të punuara me dorë për evente.</p>
+              <p className="mt-1">Struktura profesionale dhe zgjidhje për eventet tuaja.</p>
             </div>
             <div className="space-y-1">
               <p className="eyebrow mb-2">Punishtja</p>

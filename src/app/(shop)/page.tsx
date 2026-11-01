@@ -1,9 +1,7 @@
 import Link from "next/link";
 import { KerkimMeDate } from "@/components/shop/date-search";
 import { KarteProdukti } from "@/components/shop/product-card";
-import { FotoOseVend } from "@/components/ui";
-import { kategoriteMeFoto, listoProduktet } from "@/lib/catalog";
-import { urlFoto } from "@/lib/storage";
+import { listoProduktet } from "@/lib/catalog";
 import { shtoDite, sot } from "@/lib/dates";
 import { formatoCmimin } from "@/lib/format";
 import { merrBiznesinPublik } from "@/lib/tenant";
@@ -15,7 +13,7 @@ export async function generateMetadata() {
 
 export default async function Ballina() {
   const b = await merrBiznesinPublik();
-  const [produktet, kategorite] = await Promise.all([listoProduktet(b.id), kategoriteMeFoto(b.id)]);
+  const produktet = await listoProduktet(b.id);
 
   const hapat: [string, string][] = [
     ["Zgjidhni datën dhe dekorin", "Kalendari tregon menjëherë çfarë është e lirë. Zgjidhni ngjyrën ose shtoni emrin."],
@@ -36,9 +34,9 @@ export default async function Ballina() {
         <div aria-hidden className="absolute -right-24 -top-24 h-80 w-80 rounded-full bg-brand/25 blur-3xl" />
         <div aria-hidden className="absolute -left-20 top-40 h-64 w-64 rounded-full bg-brand-soft blur-2xl" />
         <div className="relative mx-auto max-w-6xl px-4 pb-14 pt-12 sm:pt-20">
-          <p className="eyebrow">{b.qyteti} · Punuar me dorë</p>
+          <p className="eyebrow">{b.qyteti}</p>
           <h1 className="mt-3 max-w-2xl text-4xl font-semibold leading-[1.05] sm:text-6xl">
-            Dekore që e bëjnë festën <span className="italic text-brand-strong">të paharrueshme.</span>
+            Struktura profesionale dhe zgjidhje për <span className="italic text-brand-strong">eventet tuaja.</span>
           </h1>
           <p className="mt-4 max-w-xl text-lg text-ink-soft">Zgjidhni datën e eventit dhe shikoni menjëherë çfarë është e lirë.</p>
           <div className="mt-8 max-w-2xl">
@@ -46,34 +44,6 @@ export default async function Ballina() {
           </div>
         </div>
       </section>
-
-      {kategorite.length > 0 && (
-        <section className="mx-auto mb-14 max-w-6xl px-4">
-          <h2 className="mb-5 text-2xl font-semibold sm:text-3xl">Kategoritë</h2>
-          <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-4">
-            {kategorite.map((k) => (
-              <Link
-                key={k.slug}
-                href={`/katalogu?kategoria=${k.slug}`}
-                className="group relative aspect-[4/3] overflow-hidden rounded-2xl bg-brand-soft"
-              >
-                <FotoOseVend
-                  src={k.foto ? urlFoto(k.foto) : null}
-                  alt={k.emri}
-                  className="h-full w-full transition duration-500 group-hover:scale-[1.04]"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-ink/75 via-ink/10 to-transparent" />
-                <div className="absolute inset-x-0 bottom-0 p-3 text-white">
-                  <p className="font-display text-lg font-semibold leading-tight">{k.emri}</p>
-                  <p className="text-xs text-white/80">
-                    {k.produkte} dekor{k.produkte === 1 ? "" : "e"}
-                  </p>
-                </div>
-              </Link>
-            ))}
-          </div>
-        </section>
-      )}
 
       <section className="mx-auto max-w-6xl px-4">
         <div className="mb-5 flex items-end justify-between">
