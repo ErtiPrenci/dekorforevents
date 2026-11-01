@@ -1,0 +1,13 @@
+node_modules
+.next
+out
+.env
+.env.local
+storage/*
+!storage/.gitkeep
+*.tsbuildinfo
+next-env.d.ts
+scripts/seed-images/
+screenshots/
+.env*.local
+.vercel

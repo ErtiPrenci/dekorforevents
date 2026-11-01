@@ -1,0 +1,27 @@
+{
+  "version": "7",
+  "dialect": "postgresql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "7",
+      "when": 1793133846773,
+      "tag": "0000_youthful_captain_britain",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1793220195332,
+      "tag": "0001_wandering_nekra",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1793222431596,
+      "tag": "0002_furry_loa",
+      "breakpoints": true
+    }
+  ]
+}

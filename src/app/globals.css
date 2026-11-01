@@ -1,0 +1,90 @@
+@import "tailwindcss";
+
+/* --brand is set per business on <body>; everything else is platform-wide. */
+@theme {
+  --font-sans: var(--font-body), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-heading), ui-serif, Georgia, serif;
+
+  --color-ink: #2a2230;
+  --color-ink-soft: #5d5466;
+  --color-muted: #8a8191;
+  --color-line: #ebe4ee;
+  --color-cream: #fbf8f5;
+  --color-paper: #ffffff;
+  --color-brand: var(--brand, #b07cd8);
+  --color-brand-soft: color-mix(in oklab, var(--brand, #b07cd8) 14%, white);
+  --color-brand-strong: color-mix(in oklab, var(--brand, #b07cd8) 75%, black);
+
+  --color-ok: #2f8f5b;
+  --color-ok-soft: #e3f4ea;
+  --color-warn: #b7791f;
+  --color-warn-soft: #fdf3dc;
+  --color-bad: #c0394b;
+  --color-bad-soft: #fbe6e9;
+  --color-info: #3b6fb6;
+  --color-info-soft: #e5eefa;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: var(--color-cream);
+  color: var(--color-ink);
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  letter-spacing: -0.01em;
+}
+
+@utility btn {
+  @apply inline-flex items-center justify-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold transition
+    disabled:cursor-not-allowed disabled:opacity-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand;
+}
+@utility btn-primary {
+  @apply btn bg-ink text-white hover:bg-ink/85;
+}
+@utility btn-brand {
+  @apply btn bg-brand-strong text-white hover:opacity-90;
+}
+@utility btn-ghost {
+  @apply btn border border-line bg-paper text-ink hover:bg-cream;
+}
+@utility btn-danger {
+  @apply btn border border-bad/30 bg-paper text-bad hover:bg-bad-soft;
+}
+@utility btn-sm {
+  @apply px-3.5 py-1.5 text-xs;
+}
+@utility card {
+  @apply rounded-2xl border border-line bg-paper;
+}
+@utility input {
+  @apply w-full rounded-xl border border-line bg-paper px-3.5 py-2.5 text-[15px] text-ink outline-none transition
+    placeholder:text-muted focus:border-brand focus:ring-2 focus:ring-brand/25;
+}
+@utility label {
+  @apply mb-1.5 block text-sm font-medium text-ink-soft;
+}
+@utility chip {
+  @apply inline-flex items-center gap-1.5 rounded-full border border-line bg-paper px-3 py-1.5 text-sm text-ink-soft transition hover:border-brand;
+}
+@utility chip-active {
+  @apply chip border-ink bg-ink text-white hover:border-ink;
+}
+@utility eyebrow {
+  @apply text-xs font-semibold uppercase tracking-[0.14em] text-muted;
+}
+
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  body {
+    background: white;
+  }
+}

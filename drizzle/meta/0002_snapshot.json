@@ -1,0 +1,2254 @@
+{
+  "id": "1c126ae0-c468-4a7b-91ef-a7ce699ab981",
+  "prevId": "24063543-d1ed-4771-bab8-7114712d270b",
+  "version": "7",
+  "dialect": "postgresql",
+  "tables": {
+    "public.biznes": {
+      "name": "biznes",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "emri": {
+          "name": "emri",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "slug": {
+          "name": "slug",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "kodi_prefix": {
+          "name": "kodi_prefix",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "logo_rruga": {
+          "name": "logo_rruga",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "ngjyra_primare": {
+          "name": "ngjyra_primare",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'#c084fc'"
+        },
+        "qyteti": {
+          "name": "qyteti",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'Tiranë'"
+        },
+        "adresa_punishtes": {
+          "name": "adresa_punishtes",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "google_maps_url": {
+          "name": "google_maps_url",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "orari_punes": {
+          "name": "orari_punes",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "telefoni": {
+          "name": "telefoni",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "whatsapp_pronarit": {
+          "name": "whatsapp_pronarit",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "instagram": {
+          "name": "instagram",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "email": {
+          "name": "email",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "nipt": {
+          "name": "nipt",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "monedha": {
+          "name": "monedha",
+          "type": "monedha",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'LEK'"
+        },
+        "kerkon_kapar": {
+          "name": "kerkon_kapar",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true,
+          "default": false
+        },
+        "kapari_perqindje": {
+          "name": "kapari_perqindje",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 30
+        },
+        "kapari_minimum": {
+          "name": "kapari_minimum",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 3000
+        },
+        "oret_mbajtjes": {
+          "name": "oret_mbajtjes",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 48
+        },
+        "kushtet": {
+          "name": "kushtet",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "numeruesi_rezervimeve": {
+          "name": "numeruesi_rezervimeve",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        },
+        "krijuar_me": {
+          "name": "krijuar_me",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "biznes_slug_unique": {
+          "name": "biznes_slug_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "slug"
+          ]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.bllokim_date": {
+      "name": "bllokim_date",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "biznes_id": {
+          "name": "biznes_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "produkt_id": {
+          "name": "produkt_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "nga": {
+          "name": "nga",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "deri": {
+          "name": "deri",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "arsyeja": {
+          "name": "arsyeja",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "bllokim_date_biznes_id_biznes_id_fk": {
+          "name": "bllokim_date_biznes_id_biznes_id_fk",
+          "tableFrom": "bllokim_date",
+          "tableTo": "biznes",
+          "columnsFrom": [
+            "biznes_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "bllokim_date_produkt_id_produkt_id_fk": {
+          "name": "bllokim_date_produkt_id_produkt_id_fk",
+          "tableFrom": "bllokim_date",
+          "tableTo": "produkt",
+          "columnsFrom": [
+            "produkt_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.foto": {
+      "name": "foto",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "biznes_id": {
+          "name": "biznes_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "produkt_id": {
+          "name": "produkt_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "rruga": {
+          "name": "rruga",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "renditja": {
+          "name": "renditja",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        }
+      },
+      "indexes": {
+        "foto_produkt": {
+          "name": "foto_produkt",
+          "columns": [
+            {
+              "expression": "produkt_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "foto_biznes_id_biznes_id_fk": {
+          "name": "foto_biznes_id_biznes_id_fk",
+          "tableFrom": "foto",
+          "tableTo": "biznes",
+          "columnsFrom": [
+            "biznes_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "foto_produkt_id_produkt_id_fk": {
+          "name": "foto_produkt_id_produkt_id_fk",
+          "tableFrom": "foto",
+          "tableTo": "produkt",
+          "columnsFrom": [
+            "produkt_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.foto_frymezimi": {
+      "name": "foto_frymezimi",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "biznes_id": {
+          "name": "biznes_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "rresht_id": {
+          "name": "rresht_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "rruga": {
+          "name": "rruga",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "foto_frymezimi_biznes_id_biznes_id_fk": {
+          "name": "foto_frymezimi_biznes_id_biznes_id_fk",
+          "tableFrom": "foto_frymezimi",
+          "tableTo": "biznes",
+          "columnsFrom": [
+            "biznes_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "foto_frymezimi_rresht_id_rezervim_rresht_id_fk": {
+          "name": "foto_frymezimi_rresht_id_rezervim_rresht_id_fk",
+          "tableFrom": "foto_frymezimi",
+          "tableTo": "rezervim_rresht",
+          "columnsFrom": [
+            "rresht_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.historik_rezervimi": {
+      "name": "historik_rezervimi",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "biznes_id": {
+          "name": "biznes_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "rezervim_id": {
+          "name": "rezervim_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "nga_statusi": {
+          "name": "nga_statusi",
+          "type": "statusi_rezervimit",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "ne_statusi": {
+          "name": "ne_statusi",
+          "type": "statusi_rezervimit",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "perdorues_id": {
+          "name": "perdorues_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "shenim": {
+          "name": "shenim",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "krijuar_me": {
+          "name": "krijuar_me",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "historik_rezervimi_biznes_id_biznes_id_fk": {
+          "name": "historik_rezervimi_biznes_id_biznes_id_fk",
+          "tableFrom": "historik_rezervimi",
+          "tableTo": "biznes",
+          "columnsFrom": [
+            "biznes_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "historik_rezervimi_rezervim_id_rezervim_id_fk": {
+          "name": "historik_rezervimi_rezervim_id_rezervim_id_fk",
+          "tableFrom": "historik_rezervimi",
+          "tableTo": "rezervim",
+          "columnsFrom": [
+            "rezervim_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "historik_rezervimi_perdorues_id_perdorues_id_fk": {
+          "name": "historik_rezervimi_perdorues_id_perdorues_id_fk",
+          "tableFrom": "historik_rezervimi",
+          "tableTo": "perdorues",
+          "columnsFrom": [
+            "perdorues_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.kategori": {
+      "name": "kategori",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "emri": {
+          "name": "emri",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "slug": {
+          "name": "slug",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "renditja": {
+          "name": "renditja",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "kategori_slug_unique": {
+          "name": "kategori_slug_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "slug"
+          ]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.klient": {
+      "name": "klient",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "biznes_id": {
+          "name": "biznes_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "emri": {
+          "name": "emri",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "telefoni": {
+          "name": "telefoni",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "qyteti": {
+          "name": "qyteti",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "numri_mosparaqitjeve": {
+          "name": "numri_mosparaqitjeve",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        },
+        "krijuar_me": {
+          "name": "krijuar_me",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {
+        "klient_biznes_telefoni": {
+          "name": "klient_biznes_telefoni",
+          "columns": [
+            {
+              "expression": "biznes_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "telefoni",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": true,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "klient_biznes_id_biznes_id_fk": {
+          "name": "klient_biznes_id_biznes_id_fk",
+          "tableFrom": "klient",
+          "tableTo": "biznes",
+          "columnsFrom": [
+            "biznes_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.njoftim": {
+      "name": "njoftim",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "biznes_id": {
+          "name": "biznes_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "kanali": {
+          "name": "kanali",
+          "type": "kanali_njoftimit",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "marresi": {
+          "name": "marresi",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "shablloni": {
+          "name": "shablloni",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "statusi": {
+          "name": "statusi",
+          "type": "statusi_njoftimit",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "gabimi": {
+          "name": "gabimi",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "krijuar_me": {
+          "name": "krijuar_me",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "njoftim_biznes_id_biznes_id_fk": {
+          "name": "njoftim_biznes_id_biznes_id_fk",
+          "tableFrom": "njoftim",
+          "tableTo": "biznes",
+          "columnsFrom": [
+            "biznes_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.opsion_produkti": {
+      "name": "opsion_produkti",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "biznes_id": {
+          "name": "biznes_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "produkt_id": {
+          "name": "produkt_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "lloji": {
+          "name": "lloji",
+          "type": "lloji_opsionit",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "emri": {
+          "name": "emri",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "i_detyrueshem": {
+          "name": "i_detyrueshem",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true,
+          "default": false
+        },
+        "gjatesia_max": {
+          "name": "gjatesia_max",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "cmimi_shtese": {
+          "name": "cmimi_shtese",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        },
+        "lejon_ngjyre_tjeter": {
+          "name": "lejon_ngjyre_tjeter",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true,
+          "default": false
+        },
+        "renditja": {
+          "name": "renditja",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "opsion_produkti_biznes_id_biznes_id_fk": {
+          "name": "opsion_produkti_biznes_id_biznes_id_fk",
+          "tableFrom": "opsion_produkti",
+          "tableTo": "biznes",
+          "columnsFrom": [
+            "biznes_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "opsion_produkti_produkt_id_produkt_id_fk": {
+          "name": "opsion_produkti_produkt_id_produkt_id_fk",
+          "tableFrom": "opsion_produkti",
+          "tableTo": "produkt",
+          "columnsFrom": [
+            "produkt_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.pagese": {
+      "name": "pagese",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "biznes_id": {
+          "name": "biznes_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "rezervim_id": {
+          "name": "rezervim_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "shuma": {
+          "name": "shuma",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "lloji": {
+          "name": "lloji",
+          "type": "lloji_pageses",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "menyra": {
+          "name": "menyra",
+          "type": "menyra_pageses",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'KESH'"
+        },
+        "shenim": {
+          "name": "shenim",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "regjistruar_nga": {
+          "name": "regjistruar_nga",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "krijuar_me": {
+          "name": "krijuar_me",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "pagese_biznes_id_biznes_id_fk": {
+          "name": "pagese_biznes_id_biznes_id_fk",
+          "tableFrom": "pagese",
+          "tableTo": "biznes",
+          "columnsFrom": [
+            "biznes_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "pagese_rezervim_id_rezervim_id_fk": {
+          "name": "pagese_rezervim_id_rezervim_id_fk",
+          "tableFrom": "pagese",
+          "tableTo": "rezervim",
+          "columnsFrom": [
+            "rezervim_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "pagese_regjistruar_nga_perdorues_id_fk": {
+          "name": "pagese_regjistruar_nga_perdorues_id_fk",
+          "tableFrom": "pagese",
+          "tableTo": "perdorues",
+          "columnsFrom": [
+            "regjistruar_nga"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.paleta_ngjyrave": {
+      "name": "paleta_ngjyrave",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "biznes_id": {
+          "name": "biznes_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "emri": {
+          "name": "emri",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "hex": {
+          "name": "hex",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "cmimi_shtese": {
+          "name": "cmimi_shtese",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        },
+        "renditja": {
+          "name": "renditja",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "paleta_ngjyrave_biznes_id_biznes_id_fk": {
+          "name": "paleta_ngjyrave_biznes_id_biznes_id_fk",
+          "tableFrom": "paleta_ngjyrave",
+          "tableTo": "biznes",
+          "columnsFrom": [
+            "biznes_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.perdorues": {
+      "name": "perdorues",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "biznes_id": {
+          "name": "biznes_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "email": {
+          "name": "email",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "emri": {
+          "name": "emri",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "fjalekalimi_hash": {
+          "name": "fjalekalimi_hash",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "roli": {
+          "name": "roli",
+          "type": "roli",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'PRONAR'"
+        },
+        "krijuar_me": {
+          "name": "krijuar_me",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "perdorues_biznes_id_biznes_id_fk": {
+          "name": "perdorues_biznes_id_biznes_id_fk",
+          "tableFrom": "perdorues",
+          "tableTo": "biznes",
+          "columnsFrom": [
+            "biznes_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "perdorues_email_unique": {
+          "name": "perdorues_email_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "email"
+          ]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.produkt": {
+      "name": "produkt",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "biznes_id": {
+          "name": "biznes_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "emri": {
+          "name": "emri",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "slug": {
+          "name": "slug",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "pershkrimi": {
+          "name": "pershkrimi",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "kategori_id": {
+          "name": "kategori_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "modet": {
+          "name": "modet",
+          "type": "text[]",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "ARRAY['RENTAL']::text[]"
+        },
+        "gjeresi_cm": {
+          "name": "gjeresi_cm",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "lartesi_cm": {
+          "name": "lartesi_cm",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "thellesi_cm": {
+          "name": "thellesi_cm",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "pesha_kg": {
+          "name": "pesha_kg",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "materiali": {
+          "name": "materiali",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "cmimi_qira": {
+          "name": "cmimi_qira",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "cmimi_porosi": {
+          "name": "cmimi_porosi",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "cmimi_shitje": {
+          "name": "cmimi_shitje",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "garancia_demtimit": {
+          "name": "garancia_demtimit",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        },
+        "sasia_ne_stok": {
+          "name": "sasia_ne_stok",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 1
+        },
+        "dite_montimi": {
+          "name": "dite_montimi",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        },
+        "dite_cmontimi": {
+          "name": "dite_cmontimi",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        },
+        "dite_prodhimi": {
+          "name": "dite_prodhimi",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "shenimet_kerkojne_aprovim": {
+          "name": "shenimet_kerkojne_aprovim",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true,
+          "default": false
+        },
+        "statusi": {
+          "name": "statusi",
+          "type": "statusi_produktit",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'AKTIV'"
+        },
+        "renditja": {
+          "name": "renditja",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        },
+        "krijuar_me": {
+          "name": "krijuar_me",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {
+        "produkt_biznes_slug": {
+          "name": "produkt_biznes_slug",
+          "columns": [
+            {
+              "expression": "biznes_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "slug",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": true,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "produkt_biznes_id_biznes_id_fk": {
+          "name": "produkt_biznes_id_biznes_id_fk",
+          "tableFrom": "produkt",
+          "tableTo": "biznes",
+          "columnsFrom": [
+            "biznes_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "produkt_kategori_id_kategori_id_fk": {
+          "name": "produkt_kategori_id_kategori_id_fk",
+          "tableFrom": "produkt",
+          "tableTo": "kategori",
+          "columnsFrom": [
+            "kategori_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.produkt_tema": {
+      "name": "produkt_tema",
+      "schema": "",
+      "columns": {
+        "biznes_id": {
+          "name": "biznes_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "produkt_id": {
+          "name": "produkt_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "tema_id": {
+          "name": "tema_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "produkt_tema_biznes_id_biznes_id_fk": {
+          "name": "produkt_tema_biznes_id_biznes_id_fk",
+          "tableFrom": "produkt_tema",
+          "tableTo": "biznes",
+          "columnsFrom": [
+            "biznes_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "produkt_tema_produkt_id_produkt_id_fk": {
+          "name": "produkt_tema_produkt_id_produkt_id_fk",
+          "tableFrom": "produkt_tema",
+          "tableTo": "produkt",
+          "columnsFrom": [
+            "produkt_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "produkt_tema_tema_id_tema_id_fk": {
+          "name": "produkt_tema_tema_id_tema_id_fk",
+          "tableFrom": "produkt_tema",
+          "tableTo": "tema",
+          "columnsFrom": [
+            "tema_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "produkt_tema_produkt_id_tema_id_pk": {
+          "name": "produkt_tema_produkt_id_tema_id_pk",
+          "columns": [
+            "produkt_id",
+            "tema_id"
+          ]
+        }
+      },
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.push_abonim": {
+      "name": "push_abonim",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "biznes_id": {
+          "name": "biznes_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "perdorues_id": {
+          "name": "perdorues_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "endpoint": {
+          "name": "endpoint",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "p256dh": {
+          "name": "p256dh",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "auth": {
+          "name": "auth",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "krijuar_me": {
+          "name": "krijuar_me",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "push_abonim_biznes_id_biznes_id_fk": {
+          "name": "push_abonim_biznes_id_biznes_id_fk",
+          "tableFrom": "push_abonim",
+          "tableTo": "biznes",
+          "columnsFrom": [
+            "biznes_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "push_abonim_perdorues_id_perdorues_id_fk": {
+          "name": "push_abonim_perdorues_id_perdorues_id_fk",
+          "tableFrom": "push_abonim",
+          "tableTo": "perdorues",
+          "columnsFrom": [
+            "perdorues_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "push_abonim_endpoint_unique": {
+          "name": "push_abonim_endpoint_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "endpoint"
+          ]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.rezervim": {
+      "name": "rezervim",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "biznes_id": {
+          "name": "biznes_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "kodi": {
+          "name": "kodi",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "token_publik": {
+          "name": "token_publik",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "klient_id": {
+          "name": "klient_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "lloji": {
+          "name": "lloji",
+          "type": "lloji_rezervimit",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'QIRA'"
+        },
+        "data_eventit": {
+          "name": "data_eventit",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "lloji_eventit": {
+          "name": "lloji_eventit",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "menyra_dorezimit": {
+          "name": "menyra_dorezimit",
+          "type": "menyra_dorezimit",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'MARRJE'"
+        },
+        "adresa_dorezimit": {
+          "name": "adresa_dorezimit",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "tarifa_transportit": {
+          "name": "tarifa_transportit",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        },
+        "statusi": {
+          "name": "statusi",
+          "type": "statusi_rezervimit",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "mbahet_deri": {
+          "name": "mbahet_deri",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "nentotali": {
+          "name": "nentotali",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "kapari": {
+          "name": "kapari",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "garancia": {
+          "name": "garancia",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        },
+        "shenime_klienti": {
+          "name": "shenime_klienti",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "shenime_brendshme": {
+          "name": "shenime_brendshme",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "arsyeja_refuzimit": {
+          "name": "arsyeja_refuzimit",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "kujtuar_skadimi": {
+          "name": "kujtuar_skadimi",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true,
+          "default": false
+        },
+        "krijuar_me": {
+          "name": "krijuar_me",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {
+        "rezervim_biznes_kodi": {
+          "name": "rezervim_biznes_kodi",
+          "columns": [
+            {
+              "expression": "biznes_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "kodi",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": true,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "rezervim_biznes_statusi": {
+          "name": "rezervim_biznes_statusi",
+          "columns": [
+            {
+              "expression": "biznes_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "statusi",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "rezervim_biznes_data": {
+          "name": "rezervim_biznes_data",
+          "columns": [
+            {
+              "expression": "biznes_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "data_eventit",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "rezervim_biznes_id_biznes_id_fk": {
+          "name": "rezervim_biznes_id_biznes_id_fk",
+          "tableFrom": "rezervim",
+          "tableTo": "biznes",
+          "columnsFrom": [
+            "biznes_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "rezervim_klient_id_klient_id_fk": {
+          "name": "rezervim_klient_id_klient_id_fk",
+          "tableFrom": "rezervim",
+          "tableTo": "klient",
+          "columnsFrom": [
+            "klient_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "rezervim_token_publik_unique": {
+          "name": "rezervim_token_publik_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "token_publik"
+          ]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.rezervim_rresht": {
+      "name": "rezervim_rresht",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "biznes_id": {
+          "name": "biznes_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "rezervim_id": {
+          "name": "rezervim_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "produkt_id": {
+          "name": "produkt_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "emri_produktit": {
+          "name": "emri_produktit",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "sasia": {
+          "name": "sasia",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 1
+        },
+        "cmimi_njesi": {
+          "name": "cmimi_njesi",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "zgjedhjet": {
+          "name": "zgjedhjet",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'[]'::jsonb"
+        },
+        "shenimi": {
+          "name": "shenimi",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "kerkon_aprovim": {
+          "name": "kerkon_aprovim",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true,
+          "default": false
+        },
+        "dritarja_nga": {
+          "name": "dritarja_nga",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "dritarja_deri": {
+          "name": "dritarja_deri",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {
+        "rresht_rezervim": {
+          "name": "rresht_rezervim",
+          "columns": [
+            {
+              "expression": "rezervim_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "rresht_produkt_dritarja": {
+          "name": "rresht_produkt_dritarja",
+          "columns": [
+            {
+              "expression": "produkt_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "dritarja_nga",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "dritarja_deri",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "rezervim_rresht_biznes_id_biznes_id_fk": {
+          "name": "rezervim_rresht_biznes_id_biznes_id_fk",
+          "tableFrom": "rezervim_rresht",
+          "tableTo": "biznes",
+          "columnsFrom": [
+            "biznes_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "rezervim_rresht_rezervim_id_rezervim_id_fk": {
+          "name": "rezervim_rresht_rezervim_id_rezervim_id_fk",
+          "tableFrom": "rezervim_rresht",
+          "tableTo": "rezervim",
+          "columnsFrom": [
+            "rezervim_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "rezervim_rresht_produkt_id_produkt_id_fk": {
+          "name": "rezervim_rresht_produkt_id_produkt_id_fk",
+          "tableFrom": "rezervim_rresht",
+          "tableTo": "produkt",
+          "columnsFrom": [
+            "produkt_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.sesion": {
+      "name": "sesion",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "biznes_id": {
+          "name": "biznes_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "perdorues_id": {
+          "name": "perdorues_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "skadon_me": {
+          "name": "skadon_me",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "sesion_biznes_id_biznes_id_fk": {
+          "name": "sesion_biznes_id_biznes_id_fk",
+          "tableFrom": "sesion",
+          "tableTo": "biznes",
+          "columnsFrom": [
+            "biznes_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "sesion_perdorues_id_perdorues_id_fk": {
+          "name": "sesion_perdorues_id_perdorues_id_fk",
+          "tableFrom": "sesion",
+          "tableTo": "perdorues",
+          "columnsFrom": [
+            "perdorues_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.tema": {
+      "name": "tema",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "emri": {
+          "name": "emri",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "slug": {
+          "name": "slug",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "tema_slug_unique": {
+          "name": "tema_slug_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "slug"
+          ]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.vlera_opsioni": {
+      "name": "vlera_opsioni",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "biznes_id": {
+          "name": "biznes_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "opsion_id": {
+          "name": "opsion_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "paleta_id": {
+          "name": "paleta_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "emri": {
+          "name": "emri",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "hex": {
+          "name": "hex",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "foto_id": {
+          "name": "foto_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "cmimi_shtese": {
+          "name": "cmimi_shtese",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        },
+        "dite_shtese": {
+          "name": "dite_shtese",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        },
+        "renditja": {
+          "name": "renditja",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "vlera_opsioni_biznes_id_biznes_id_fk": {
+          "name": "vlera_opsioni_biznes_id_biznes_id_fk",
+          "tableFrom": "vlera_opsioni",
+          "tableTo": "biznes",
+          "columnsFrom": [
+            "biznes_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "vlera_opsioni_opsion_id_opsion_produkti_id_fk": {
+          "name": "vlera_opsioni_opsion_id_opsion_produkti_id_fk",
+          "tableFrom": "vlera_opsioni",
+          "tableTo": "opsion_produkti",
+          "columnsFrom": [
+            "opsion_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "vlera_opsioni_paleta_id_paleta_ngjyrave_id_fk": {
+          "name": "vlera_opsioni_paleta_id_paleta_ngjyrave_id_fk",
+          "tableFrom": "vlera_opsioni",
+          "tableTo": "paleta_ngjyrave",
+          "columnsFrom": [
+            "paleta_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        },
+        "vlera_opsioni_foto_id_foto_id_fk": {
+          "name": "vlera_opsioni_foto_id_foto_id_fk",
+          "tableFrom": "vlera_opsioni",
+          "tableTo": "foto",
+          "columnsFrom": [
+            "foto_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    }
+  },
+  "enums": {
+    "public.kanali_njoftimit": {
+      "name": "kanali_njoftimit",
+      "schema": "public",
+      "values": [
+        "WHATSAPP",
+        "PUSH"
+      ]
+    },
+    "public.lloji_opsionit": {
+      "name": "lloji_opsionit",
+      "schema": "public",
+      "values": [
+        "NGJYRE",
+        "TEKST",
+        "NUMER",
+        "ZGJEDHJE"
+      ]
+    },
+    "public.lloji_pageses": {
+      "name": "lloji_pageses",
+      "schema": "public",
+      "values": [
+        "KAPAR",
+        "MBETJE",
+        "GARANCI",
+        "KTHIM_GARANCIE"
+      ]
+    },
+    "public.lloji_rezervimit": {
+      "name": "lloji_rezervimit",
+      "schema": "public",
+      "values": [
+        "QIRA",
+        "POROSI",
+        "BLERJE"
+      ]
+    },
+    "public.menyra_dorezimit": {
+      "name": "menyra_dorezimit",
+      "schema": "public",
+      "values": [
+        "MARRJE",
+        "DERGESE"
+      ]
+    },
+    "public.menyra_pageses": {
+      "name": "menyra_pageses",
+      "schema": "public",
+      "values": [
+        "KESH"
+      ]
+    },
+    "public.monedha": {
+      "name": "monedha",
+      "schema": "public",
+      "values": [
+        "LEK",
+        "EUR"
+      ]
+    },
+    "public.roli": {
+      "name": "roli",
+      "schema": "public",
+      "values": [
+        "PRONAR",
+        "STAF"
+      ]
+    },
+    "public.statusi_njoftimit": {
+      "name": "statusi_njoftimit",
+      "schema": "public",
+      "values": [
+        "DERGUAR",
+        "DESHTOI",
+        "ANASHKALUAR"
+      ]
+    },
+    "public.statusi_produktit": {
+      "name": "statusi_produktit",
+      "schema": "public",
+      "values": [
+        "AKTIV",
+        "NE_MIREMBAJTJE",
+        "SHITUR",
+        "I_TERHEQUR"
+      ]
+    },
+    "public.statusi_rezervimit": {
+      "name": "statusi_rezervimit",
+      "schema": "public",
+      "values": [
+        "NE_PRITJE_TE_APROVIMIT",
+        "NE_PRITJE_TE_KAPARIT",
+        "KONFIRMUAR",
+        "DOREZUAR",
+        "PERFUNDUAR",
+        "ANULUAR",
+        "REFUZUAR",
+        "SKADUAR",
+        "MOSPARAQITJE"
+      ]
+    }
+  },
+  "schemas": {},
+  "sequences": {},
+  "roles": {},
+  "policies": {},
+  "views": {},
+  "_meta": {
+    "columns": {},
+    "schemas": {},
+    "tables": {}
+  }
+}

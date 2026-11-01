@@ -1,0 +1,1 @@
+ALTER TABLE "biznes" ADD COLUMN "kerkon_kapar" boolean DEFAULT false NOT NULL;

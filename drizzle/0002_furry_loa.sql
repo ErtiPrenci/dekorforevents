@@ -1,0 +1,1 @@
+ALTER TABLE "biznes" ADD COLUMN "nipt" text;
