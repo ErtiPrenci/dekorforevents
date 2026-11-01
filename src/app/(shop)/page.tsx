@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { KerkimMeDate } from "@/components/shop/date-search";
 import { KarteProdukti } from "@/components/shop/product-card";
-import { listoProduktet } from "@/lib/catalog";
+import { filtratEPerdorur, listoProduktet } from "@/lib/catalog";
 import { shtoDite, sot } from "@/lib/dates";
 import { formatoCmimin } from "@/lib/format";
 import { merrBiznesinPublik } from "@/lib/tenant";
@@ -13,7 +13,7 @@ export async function generateMetadata() {
 
 export default async function Ballina() {
   const b = await merrBiznesinPublik();
-  const produktet = await listoProduktet(b.id);
+  const [produktet, { kategorite }] = await Promise.all([listoProduktet(b.id), filtratEPerdorur(b.id)]);
 
   const hapat: [string, string][] = [
     ["Zgjidhni datën dhe dekorin", "Kalendari tregon menjëherë çfarë është e lirë. Zgjidhni ngjyrën ose shtoni emrin."],
@@ -44,6 +44,23 @@ export default async function Ballina() {
           </div>
         </div>
       </section>
+
+      {kategorite.length > 0 && (
+        <section className="mx-auto mb-12 max-w-6xl px-4">
+          <h2 className="mb-4 text-2xl font-semibold sm:text-3xl">Kategoritë</h2>
+          <div className="flex flex-wrap gap-2 sm:gap-3">
+            {kategorite.map((k) => (
+              <Link
+                key={k.slug}
+                href={`/katalogu?kategoria=${k.slug}`}
+                className="rounded-2xl border border-line bg-paper px-5 py-3 font-medium transition hover:border-brand hover:bg-brand-soft"
+              >
+                {k.emri}
+              </Link>
+            ))}
+          </div>
+        </section>
+      )}
 
       <section className="mx-auto max-w-6xl px-4">
         <div className="mb-5 flex items-end justify-between">
