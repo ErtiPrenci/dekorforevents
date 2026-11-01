@@ -37,7 +37,6 @@ const prefix =
     .slice(0, 4) ||
   "R";
 
-await krijoTaksonomine();
 const [b] = await db
   .insert(biznes)
   .values({
@@ -48,6 +47,7 @@ const [b] = await db
     instagram: process.env.SETUP_INSTAGRAM?.replace(/^@/, "") || null,
   })
   .returning();
+await krijoTaksonomine(b.id);
 await db.insert(perdorues).values({
   biznesId: b.id,
   email,

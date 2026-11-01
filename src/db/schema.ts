@@ -99,14 +99,20 @@ export const sesion = pgTable("sesion", {
   skadonMe: timestamp("skadon_me", { withTimezone: true }).notNull(),
 });
 
-// Shared taxonomy (not tenant-owned)
-export const kategori = pgTable("kategori", {
-  id: uuid("id").primaryKey().defaultRandom(),
-  emri: text("emri").notNull(),
-  slug: text("slug").notNull().unique(),
-  renditja: integer("renditja").notNull().default(0),
-});
+// Each business manages its own categories (Produktet → Kategoritë).
+export const kategori = pgTable(
+  "kategori",
+  {
+    id: uuid("id").primaryKey().defaultRandom(),
+    biznesId: biznesId(),
+    emri: text("emri").notNull(),
+    slug: text("slug").notNull(),
+    renditja: integer("renditja").notNull().default(0),
+  },
+  (t) => [uniqueIndex("kategori_biznes_slug").on(t.biznesId, t.slug)],
+);
 
+// Shared taxonomy (not tenant-owned)
 export const tema = pgTable("tema", {
   id: uuid("id").primaryKey().defaultRandom(),
   emri: text("emri").notNull(),

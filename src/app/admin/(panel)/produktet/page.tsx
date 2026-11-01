@@ -37,9 +37,14 @@ export default async function Produktet() {
     <div className="space-y-5">
       <div className="flex items-center justify-between">
         <h1 className="text-3xl font-semibold">Produktet</h1>
-        <Link href="/admin/produktet/i-ri" className="btn-primary">
-          + Produkt i ri
-        </Link>
+        <div className="flex gap-2">
+          <Link href="/admin/kategorite" className="btn-ghost">
+            Kategoritë
+          </Link>
+          <Link href="/admin/produktet/i-ri" className="btn-primary">
+            + Produkt i ri
+          </Link>
+        </div>
       </div>
       {lista.length ? (
         <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">

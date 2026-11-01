@@ -22,6 +22,13 @@
       "when": 1793222431596,
       "tag": "0002_furry_loa",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1793568180677,
+      "tag": "0003_kategori_per_biznes",
+      "breakpoints": true
     }
   ]
 }

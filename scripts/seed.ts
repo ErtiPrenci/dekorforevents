@@ -32,9 +32,6 @@ if (await db.query.biznes.findFirst({ where: eq(biznes.slug, slug) })) {
   process.exit(0);
 }
 
-await krijoTaksonomine();
-const kat = Object.fromEntries((await db.select().from(kategori)).map((k) => [k.emri, k.id]));
-const tem = Object.fromEntries((await db.select().from(tema)).map((t) => [t.emri, t.id]));
 
 const [b] = await db
   .insert(biznes)
@@ -48,6 +45,12 @@ const [b] = await db
     instagram: "dekor_for_events",
   })
   .returning();
+
+await krijoTaksonomine(b.id);
+const kat = Object.fromEntries(
+  (await db.select().from(kategori).where(eq(kategori.biznesId, b.id))).map((k) => [k.emri, k.id]),
+);
+const tem = Object.fromEntries((await db.select().from(tema)).map((t) => [t.emri, t.id]));
 
 await db.insert(perdorues).values({
   biznesId: b.id,

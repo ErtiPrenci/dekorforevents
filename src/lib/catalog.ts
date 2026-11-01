@@ -8,7 +8,9 @@ export type ProduktKarte = Awaited<ReturnType<typeof listoProduktet>>[number];
 export async function listoProduktet(biznesId: string, filtra: { kategoria?: string; tema?: string } = {}) {
   const kushtet = [eq(produkt.biznesId, biznesId), inArray(produkt.statusi, ["AKTIV", "NE_MIREMBAJTJE"])];
   if (filtra.kategoria) {
-    kushtet.push(sql`${produkt.kategoriId} = (select id from ${kategori} where ${kategori.slug} = ${filtra.kategoria})`);
+    kushtet.push(
+      sql`${produkt.kategoriId} = (select id from ${kategori} where ${kategori.biznesId} = ${biznesId} and ${kategori.slug} = ${filtra.kategoria})`,
+    );
   }
   if (filtra.tema) {
     kushtet.push(
@@ -55,6 +57,25 @@ export async function merrProduktin(biznesId: string, slug: string) {
   });
 }
 
+/** Categories with at least one visible product, each with a cover photo and a count — for the home page. */
+export async function kategoriteMeFoto(biznesId: string) {
+  const teDukshme = sql`${produkt.statusi} in ('AKTIV', 'NE_MIREMBAJTJE')`;
+  return db
+    .select({
+      emri: kategori.emri,
+      slug: kategori.slug,
+      produkte: sql<number>`count(${produkt.id})::int`,
+      foto: sql<string | null>`(select f.rruga from ${foto} f join ${produkt} p2 on p2.id = f.produkt_id
+        where p2.kategori_id = ${kategori.id} and p2.statusi in ('AKTIV', 'NE_MIREMBAJTJE')
+        order by p2.renditja, f.renditja limit 1)`,
+    })
+    .from(kategori)
+    .innerJoin(produkt, and(eq(produkt.kategoriId, kategori.id), teDukshme))
+    .where(eq(kategori.biznesId, biznesId))
+    .groupBy(kategori.id)
+    .orderBy(asc(kategori.renditja), asc(kategori.emri));
+}
+
 /** Categories and themes that actually have products in this shop. */
 export async function filtratEPerdorur(biznesId: string) {
   const [kategorite, temat] = await Promise.all([
@@ -62,6 +83,7 @@ export async function filtratEPerdorur(biznesId: string) {
       .selectDistinct({ emri: kategori.emri, slug: kategori.slug, renditja: kategori.renditja })
       .from(kategori)
       .innerJoin(produkt, and(eq(produkt.kategoriId, kategori.id), eq(produkt.biznesId, biznesId), eq(produkt.statusi, "AKTIV")))
+      .where(eq(kategori.biznesId, biznesId))
       .orderBy(asc(kategori.renditja)),
     db
       .selectDistinct({ emri: tema.emri, slug: tema.slug })

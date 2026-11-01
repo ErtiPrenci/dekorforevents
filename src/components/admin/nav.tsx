@@ -13,6 +13,8 @@ const LIDHJET = [
   },
   { href: "/admin/kalendari", emri: "Kalendari", ikona: "M3 5h18v16H3zM3 10h18M8 3v4M16 3v4", pronar: false },
   { href: "/admin/produktet", emri: "Produktet", ikona: "M4 7 12 3l8 4v10l-8 4-8-4zM4 7l8 4 8-4M12 11v10", pronar: true },
+  // On phones the bottom bar has no room; categories are reached from Produktet.
+  { href: "/admin/kategorite", emri: "Kategoritë", ikona: "M4 5h7v7H4zM13 5h7v7h-7zM4 14h7v5H4zM13 14h7v5h-7z", pronar: true, vetemDesktop: true },
   { href: "/admin/arka", emri: "Arka", ikona: "M3 7h18v12H3zM3 11h18M7 15h3", pronar: true },
   {
     href: "/admin/cilesimet",
@@ -24,7 +26,7 @@ const LIDHJET = [
 
 export function NavAdmin({ roli, vertikal = false }: { roli: "PRONAR" | "STAF"; vertikal?: boolean }) {
   const path = usePathname();
-  const lidhjet = LIDHJET.filter((l) => !l.pronar || roli === "PRONAR");
+  const lidhjet = LIDHJET.filter((l) => (!l.pronar || roli === "PRONAR") && (vertikal || !("vetemDesktop" in l)));
   const aktiv = (href: string) => (href === "/admin" ? path === "/admin" : path.startsWith(href));
 
   if (vertikal) {

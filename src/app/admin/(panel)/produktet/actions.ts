@@ -5,7 +5,7 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { z } from "zod";
 import { db, type Tx } from "@/db";
-import { foto, opsionProdukti, paletaNgjyrave, produkt, produktTema, vleraOpsioni } from "@/db/schema";
+import { foto, kategori, opsionProdukti, paletaNgjyrave, produkt, produktTema, vleraOpsioni } from "@/db/schema";
 import type { Rezultat } from "@/components/admin/action-form";
 import { kerkoPronarin } from "@/lib/auth";
 import { slugify } from "@/lib/format";
@@ -156,6 +156,13 @@ export async function ruajProduktin(produktId: string | null, _: Rezultat, fd: F
     shenimetKerkojneAprovim: fd.get("shenimetKerkojneAprovim") === "on",
     statusi: statusi as "AKTIV",
   };
+  if (fushat.kategoriId) {
+    const [k] = await db
+      .select({ id: kategori.id })
+      .from(kategori)
+      .where(and(eq(kategori.id, fushat.kategoriId), eq(kategori.biznesId, admin.biznesId)));
+    if (!k) fushat.kategoriId = null;
+  }
   const temat = fd.getAll("temat").map(String).filter((t) => /^[0-9a-f-]{36}$/.test(t));
   const fotoTeReja = fd.getAll("fotot").filter((f): f is File => f instanceof File && f.size > 0);
 

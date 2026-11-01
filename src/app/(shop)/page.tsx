@@ -1,7 +1,9 @@
 import Link from "next/link";
 import { KerkimMeDate } from "@/components/shop/date-search";
 import { KarteProdukti } from "@/components/shop/product-card";
-import { filtratEPerdorur, listoProduktet } from "@/lib/catalog";
+import { FotoOseVend } from "@/components/ui";
+import { kategoriteMeFoto, listoProduktet } from "@/lib/catalog";
+import { urlFoto } from "@/lib/storage";
 import { shtoDite, sot } from "@/lib/dates";
 import { formatoCmimin } from "@/lib/format";
 import { merrBiznesinPublik } from "@/lib/tenant";
@@ -13,7 +15,7 @@ export async function generateMetadata() {
 
 export default async function Ballina() {
   const b = await merrBiznesinPublik();
-  const [produktet, { kategorite }] = await Promise.all([listoProduktet(b.id), filtratEPerdorur(b.id)]);
+  const [produktet, kategorite] = await Promise.all([listoProduktet(b.id), kategoriteMeFoto(b.id)]);
 
   const hapat: [string, string][] = [
     ["Zgjidhni datën dhe dekorin", "Kalendari tregon menjëherë çfarë është e lirë. Zgjidhni ngjyrën ose shtoni emrin."],
@@ -42,17 +44,36 @@ export default async function Ballina() {
           <div className="mt-8 max-w-2xl">
             <KerkimMeDate min={shtoDite(sot(), 1)} />
           </div>
-          {kategorite.length > 0 && (
-            <div className="mt-6 flex flex-wrap gap-2">
-              {kategorite.map((k) => (
-                <Link key={k.slug} href={`/katalogu?kategoria=${k.slug}`} className="chip">
-                  {k.emri}
-                </Link>
-              ))}
-            </div>
-          )}
         </div>
       </section>
+
+      {kategorite.length > 0 && (
+        <section className="mx-auto mb-14 max-w-6xl px-4">
+          <h2 className="mb-5 text-2xl font-semibold sm:text-3xl">Kategoritë</h2>
+          <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-4">
+            {kategorite.map((k) => (
+              <Link
+                key={k.slug}
+                href={`/katalogu?kategoria=${k.slug}`}
+                className="group relative aspect-[4/3] overflow-hidden rounded-2xl bg-brand-soft"
+              >
+                <FotoOseVend
+                  src={k.foto ? urlFoto(k.foto) : null}
+                  alt={k.emri}
+                  className="h-full w-full transition duration-500 group-hover:scale-[1.04]"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-ink/75 via-ink/10 to-transparent" />
+                <div className="absolute inset-x-0 bottom-0 p-3 text-white">
+                  <p className="font-display text-lg font-semibold leading-tight">{k.emri}</p>
+                  <p className="text-xs text-white/80">
+                    {k.produkte} dekor{k.produkte === 1 ? "" : "e"}
+                  </p>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </section>
+      )}
 
       <section className="mx-auto max-w-6xl px-4">
         <div className="mb-5 flex items-end justify-between">

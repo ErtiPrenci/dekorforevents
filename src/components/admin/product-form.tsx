@@ -124,7 +124,12 @@ export function FormaEProduktit({
         </label>
         <div className="grid gap-4 sm:grid-cols-2">
           <label className="block">
-            <span className="label">Kategoria</span>
+            <span className="label flex justify-between">
+              Kategoria
+              <a href="/admin/kategorite" target="_blank" className="text-xs font-normal underline">
+                Menaxho kategoritë
+              </a>
+            </span>
             <select name="kategoriId" className="input" defaultValue={p.kategoriId ?? ""}>
               <option value="">—</option>
               {kategorite.map((k) => (

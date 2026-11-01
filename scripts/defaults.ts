@@ -28,10 +28,10 @@ export const PALETA: [string, string, number][] = [
   ["Ari", "#d4af37", 2000],
 ];
 
-/** Shared categories and themes; safe to run again. */
-export async function krijoTaksonomine() {
+/** Starting categories for a business plus the shared themes; safe to run again. */
+export async function krijoTaksonomine(biznesId: string) {
   for (const [i, emri] of KATEGORITE.entries()) {
-    await db.insert(kategori).values({ emri, slug: slugify(emri), renditja: i }).onConflictDoNothing();
+    await db.insert(kategori).values({ biznesId, emri, slug: slugify(emri), renditja: i }).onConflictDoNothing();
   }
   for (const emri of TEMAT) {
     await db.insert(tema).values({ emri, slug: slugify(emri) }).onConflictDoNothing();

@@ -99,8 +99,10 @@ export async function ruajFoto(
 
 // On Vercel there is no persistent disk: with a Blob store connected, photos
 // live in Vercel Blob under the same keys. Locally they stay in STORAGE_DIR.
+// Connected stores provide either a read-write token or, on newer projects, a
+// store id that the SDK pairs with Vercel's OIDC token.
 function neCloud() {
-  return !!process.env.BLOB_READ_WRITE_TOKEN;
+  return !!(process.env.BLOB_READ_WRITE_TOKEN || process.env.BLOB_STORE_ID);
 }
 
 function aksesiBlob(): "private" | "public" {
