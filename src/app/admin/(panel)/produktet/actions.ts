@@ -220,6 +220,7 @@ export async function ngarkoFotot(produktId: string, _: Rezultat, fd: FormData):
     for (const f of skedaret) ruajtur.push(await ruajFoto(admin.biznesId, "produkte", f));
   } catch (e) {
     await Promise.all(ruajtur.map(fshiSkedarin));
+    if (!(e instanceof GabimFoto)) console.error("[foto] ngarkimi dështoi", e);
     return { gabim: e instanceof GabimFoto ? e.message : "Fotot nuk u ruajtën." };
   }
   const fillimi = Math.max(-1, ...ekzistuese.map((f) => f.renditja)) + 1;

@@ -48,6 +48,7 @@ export async function ruajBiznesin(_: Rezultat, fd: FormData): Promise<Rezultat>
     try {
       logoRruga = await ruajFoto(admin.biznesId, "logo", logo, 400);
     } catch (e) {
+      if (!(e instanceof GabimFoto)) console.error("[logo] ruajtja dështoi", e);
       return { gabim: e instanceof GabimFoto ? e.message : "Logoja nuk u ruajt." };
     }
     if (vjeter?.logoRruga) await fshiFoto(vjeter.logoRruga);

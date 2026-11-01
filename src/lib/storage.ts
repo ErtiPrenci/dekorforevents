@@ -77,8 +77,19 @@ export async function ruajFoto(
   const celesi = `biznes/${biznesId}/${dosja}/${randomUUID()}.${ext}`;
   if (neCloud()) {
     const { put } = await import("@vercel/blob");
-    await put(celesi, teDhenat, { access: aksesiBlob(), addRandomSuffix: false, contentType: LLOJET[ext] });
+    try {
+      await put(celesi, teDhenat, { access: aksesiBlob(), addRandomSuffix: false, contentType: LLOJET[ext] });
+    } catch (e) {
+      console.error("[foto] Vercel Blob put dështoi:", e);
+      throw new GabimFoto(
+        `Fotoja nuk u ruajt në cloud (${e instanceof Error ? e.message : "gabim i panjohur"}). Kontrolloni që Blob të jetë "${aksesiBlob()}".`,
+      );
+    }
     return celesi;
+  }
+  if (process.env.VERCEL) {
+    // Vercel's filesystem is read-only: without Blob there is nowhere to save.
+    throw new GabimFoto("Ruajtja e fotove nuk është lidhur: krijoni një Blob store dhe lidheni me projektin në Vercel.");
   }
   const skedari = path.join(/* turbopackIgnore: true */ ROOT, celesi);
   await mkdir(path.dirname(skedari), { recursive: true });
