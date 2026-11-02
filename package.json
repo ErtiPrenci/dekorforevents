@@ -20,6 +20,7 @@
     "setup": "tsx scripts/setup.ts"
   },
   "dependencies": {
+    "@vercel/analytics": "^1.6.1",
     "@vercel/blob": "^2.8.2",
     "bcryptjs": "^3.0.3",
     "date-fns": "^4.4.0",
